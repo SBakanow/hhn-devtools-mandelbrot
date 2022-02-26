@@ -1,4 +1,4 @@
-rootProject.name = 'devtools-22-ss'
+rootProject.name = 'arting-devtools-22-ss'
 
 
 include ':apis', ':components', ':javafx'
