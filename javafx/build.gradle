@@ -1,0 +1,34 @@
+plugins {
+    id ("application")
+    id ("org.openjfx.javafxplugin").version("0.0.9")
+    id 'org.beryx.jlink' version '2.24.4'
+}
+
+group = "de.hhn.it.pp"
+version = "1.0-SNAPSHOT"
+
+
+javafx {
+    version = "17"
+    modules = [ "javafx.controls", "javafx.fxml" ]
+}
+
+// This is the hint of https://stackoverflow.com/questions/52569724/javafx-11-create-a-jar-file-with-gradle
+// and https://bitbucket.org/FlPe/javafx_jlink_example/src/master/
+// and https://docs.gradle.org/current/javadoc/org/gradle/api/jvm/ModularitySpec.html#getInferModulePath--
+java { modularity.inferModulePath = true }
+// This is a kind of workaround, see https://github.com/java9-modularity/gradle-modules-plugin/issues/165
+modularity.disableEffectiveArgumentsAdjustment()
+
+dependencies {
+    implementation project (":apis")
+    implementation project (":components")
+    // see also the dependencies in build.gradle (root)
+
+}
+
+application {
+    mainModule = "devtools.javafx.main"
+    mainClass = "de.hhn.it.pp.javafx.Main"
+    applicationDefaultJvmArgs = ['-ea']
+}
