@@ -1,4 +1,4 @@
-image: $CI_REGISTRY/it/development/git-runners/itadmin-openjdk16_openjfx16-repo-hhnit
+image: $CI_REGISTRY/it/development/git-runners/itadmin-openjdk17_openjfx17-repo-hhnit
 
 stages:
   - build
