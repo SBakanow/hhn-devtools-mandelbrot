@@ -5,7 +5,7 @@ plugins {
     id("com.github.spotbugs").version("5.0.6")
 }
 
-group = "de.hhn.it.pp"
+group = "de.hhn.it.devtools.components"
 version = "1.0-SNAPSHOT"
 
 
