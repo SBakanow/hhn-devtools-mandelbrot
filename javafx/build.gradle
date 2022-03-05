@@ -32,3 +32,10 @@ application {
     mainClass = "de.hhn.it.pp.javafx.Main"
     applicationDefaultJvmArgs = ['-ea']
 }
+
+
+jlink {
+    launcher {
+        name = "devtools"
+    }
+}
