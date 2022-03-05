@@ -1,5 +1,5 @@
-group = "de.hhn.it.pp"
-version = "1.0-SNAPSHOT"
+group = "de.hhn.it.devtools"
+version = "1.0"
 
 
 allprojects {
