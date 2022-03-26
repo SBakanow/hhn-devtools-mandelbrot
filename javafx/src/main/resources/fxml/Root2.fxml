@@ -13,7 +13,7 @@
 <VBox xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
       minWidth="-Infinity" prefHeight="700.0" prefWidth="1000.0"
       xmlns="http://javafx.com/javafx/10.0.1"
-      fx:controller="de.hhn.it.pp.javafx.controllers.RootController">
+      fx:controller="de.hhn.it.devtools.javafx.controllers.RootController">
     <children>
         <MenuBar fx:id="menuBar">
             <menus>
