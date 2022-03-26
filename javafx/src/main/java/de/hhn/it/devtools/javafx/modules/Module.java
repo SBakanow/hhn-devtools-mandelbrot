@@ -1,7 +1,7 @@
-package de.hhn.it.pp.javafx.modules;
+package de.hhn.it.devtools.javafx.modules;
 
 
-import de.hhn.it.pp.javafx.controllers.Controller;
+import de.hhn.it.devtools.javafx.controllers.Controller;
 import javafx.scene.Node;
 
 public class Module {

@@ -1,6 +1,6 @@
-package de.hhn.it.pp.javafx.controllers;
+package de.hhn.it.devtools.javafx.controllers;
 
-import de.hhn.it.pp.javafx.modules.Module;
+import de.hhn.it.devtools.javafx.modules.Module;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,7 +9,6 @@ import java.util.ResourceBundle;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuBar;
 import javafx.scene.layout.AnchorPane;

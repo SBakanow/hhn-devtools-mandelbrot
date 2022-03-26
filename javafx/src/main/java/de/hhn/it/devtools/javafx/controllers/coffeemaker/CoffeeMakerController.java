@@ -1,4 +1,4 @@
-package de.hhn.it.pp.javafx.controllers.coffeemaker;
+package de.hhn.it.devtools.javafx.controllers.coffeemaker;
 
 import de.hhn.it.devtools.apis.examples.coffeemakerservice.CoffeeMakerDescriptor;
 import de.hhn.it.devtools.apis.examples.coffeemakerservice.CoffeeMakerListener;

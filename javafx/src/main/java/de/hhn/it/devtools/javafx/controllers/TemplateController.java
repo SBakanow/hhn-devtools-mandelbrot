@@ -1,4 +1,4 @@
-package de.hhn.it.pp.javafx.controllers;
+package de.hhn.it.devtools.javafx.controllers;
 
 public class TemplateController extends Controller {
   private static final org.slf4j.Logger logger =

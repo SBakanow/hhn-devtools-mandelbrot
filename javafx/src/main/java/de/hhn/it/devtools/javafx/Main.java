@@ -1,11 +1,10 @@
-package de.hhn.it.pp.javafx;
+package de.hhn.it.devtools.javafx;
 
-import de.hhn.it.pp.javafx.controllers.Controller;
-import de.hhn.it.pp.javafx.controllers.RootController;
-import de.hhn.it.pp.javafx.modules.Module;
+import de.hhn.it.devtools.javafx.controllers.Controller;
+import de.hhn.it.devtools.javafx.controllers.RootController;
+import de.hhn.it.devtools.javafx.modules.Module;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 

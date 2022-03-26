@@ -1,11 +1,11 @@
-package de.hhn.it.pp.javafx.controllers;
+package de.hhn.it.devtools.javafx.controllers;
 
 import de.hhn.it.devtools.apis.examples.coffeemakerservice.AdminCoffeeMakerService;
 import de.hhn.it.devtools.apis.examples.coffeemakerservice.CoffeeMakerDescriptor;
 import de.hhn.it.devtools.apis.examples.coffeemakerservice.CoffeeMakerService;
 import de.hhn.it.devtools.apis.exceptions.IllegalParameterException;
 import de.hhn.it.devtools.components.example.coffeemakerservice.provider.WnckCoffeeMakerService;
-import de.hhn.it.pp.javafx.controllers.coffeemaker.CoffeeMakerController;
+import de.hhn.it.devtools.javafx.controllers.coffeemaker.CoffeeMakerController;
 
 import java.net.URL;
 import java.util.HashMap;

@@ -1,4 +1,4 @@
-package de.hhn.it.pp.javafx.controllers;
+package de.hhn.it.devtools.javafx.controllers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
