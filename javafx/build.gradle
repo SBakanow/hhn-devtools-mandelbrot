@@ -29,7 +29,7 @@ dependencies {
 
 application {
     mainModule = "devtools.javafx"
-    mainClass = "de.hhn.it.pp.javafx.Main"
+    mainClass = "de.hhn.it.devtools.javafx.Main"
     applicationDefaultJvmArgs = ['-ea']
 }
 
