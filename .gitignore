@@ -21,3 +21,6 @@ bin/
 
 # jenv specific files
 .java-version
+
+# MacOS finder
+.DS_Store
