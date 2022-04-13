@@ -2,11 +2,16 @@ plugins {
     id ("application")
     id ("org.openjfx.javafxplugin").version("0.0.12")
     id ("org.beryx.jlink").version("2.24.4")
+    id 'org.jetbrains.kotlin.jvm' version "1.6.20"
 }
 
 group = "de.hhn.it.devtools.javafx"
 version = "1.0"
 
+repositories {
+    mavenCentral()
+    maven { url "https://jitpack.io" }
+}
 
 javafx {
     version = "17"
@@ -25,12 +30,41 @@ dependencies {
     implementation project (":components")
     // see also the dependencies in build.gradle (root)
 
+    //Module Patching
+
+
+    // OpenGLFX
+    implementation 'com.github.husker-dev.openglfx:core:2.6'
+    implementation 'com.github.husker-dev.openglfx:lwjgl:2.6'
+
+
+    // LWJGL
+    implementation 'org.lwjgl:lwjgl:3.3.1'
+    implementation 'org.lwjgl:lwjgl-glfw:3.3.1'
+    implementation 'org.lwjgl:lwjgl-opengl:3.3.1'
+    implementation 'org.lwjgl:lwjgl::natives-macos'
+    implementation 'org.lwjgl:lwjgl-glfw::natives-macos'
+    implementation 'org.lwjgl:lwjgl-opengl::natives-macos'
+
+    // Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib"
 }
+
 
 application {
     mainModule = "devtools.javafx"
     mainClass = "de.hhn.it.devtools.javafx.Main"
-    applicationDefaultJvmArgs = ['-ea']
+    applicationDefaultJvmArgs = ['-ea'
+                                 , '--add-exports=javafx.graphics/com.sun.javafx.scene.layout=core'
+                                 , '--add-opens=javafx.graphics/com.sun.javafx.scene.layout=core'
+                                 , '--add-exports=javafx.graphics/com.sun.prism=core'
+                                 , '--add-opens=javafx.graphics/com.sun.prism=core'
+                                 , '--add-exports=javafx.graphics/com.sun.javafx.sg.prism=core'
+                                 , '--add-opens=javafx.graphics/com.sun.javafx.sg.prism=core'
+                                 , '--add-exports=javafx.graphics/com.sun.prism=lwjgl'
+                                 , '--add-opens=javafx.graphics/com.sun.prism=lwjgl'
+                                 , '--add-exports=javafx.graphics/com.sun.javafx.tk=lwjgl'
+                                 , '--add-opens=javafx.graphics/com.sun.javafx.tk=lwjgl']
 }
 
 
@@ -39,3 +73,5 @@ jlink {
         name = "devtools"
     }
 }
+
+
