@@ -42,9 +42,9 @@ dependencies {
     implementation 'org.lwjgl:lwjgl:3.3.1'
     implementation 'org.lwjgl:lwjgl-glfw:3.3.1'
     implementation 'org.lwjgl:lwjgl-opengl:3.3.1'
-    implementation 'org.lwjgl:lwjgl::natives-macos'
-    implementation 'org.lwjgl:lwjgl-glfw::natives-macos'
-    implementation 'org.lwjgl:lwjgl-opengl::natives-macos'
+    implementation 'org.lwjgl:lwjgl::natives-windows'
+    implementation 'org.lwjgl:lwjgl-glfw::natives-windows'
+    implementation 'org.lwjgl:lwjgl-opengl::natives-windows'
 
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
@@ -64,7 +64,11 @@ application {
                                  , '--add-exports=javafx.graphics/com.sun.prism=lwjgl'
                                  , '--add-opens=javafx.graphics/com.sun.prism=lwjgl'
                                  , '--add-exports=javafx.graphics/com.sun.javafx.tk=lwjgl'
-                                 , '--add-opens=javafx.graphics/com.sun.javafx.tk=lwjgl']
+                                 , '--add-opens=javafx.graphics/com.sun.javafx.tk=lwjgl'
+                                 , '--add-exports=javafx.graphics/com.sun.javafx.scene=lwjgl'
+                                 , '--add-opens=javafx.graphics/com.sun.javafx.scene=lwjgl'
+                                 , '--add-exports=javafx.graphics/com.sun.prism.impl=lwjgl'
+                                 , '--add-opens=javafx.graphics/com.sun.prism.impl=lwjgl']
 }
 
 
