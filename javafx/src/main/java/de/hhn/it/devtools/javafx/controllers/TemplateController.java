@@ -7,7 +7,6 @@ import com.huskerdev.openglfx.OpenGLCanvas;
 import com.huskerdev.openglfx.lwjgl.LWJGLCanvasKt;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
@@ -57,8 +56,5 @@ public class TemplateController extends Controller implements Initializable {
       logger.debug("Not null");
     }
     controlAnchorPane.getChildren().add(stage);
-    Platform.runLater(() -> {
-      logger.debug("{} {}", stage.getWidth(), stage.getHeight());
-    });
   }
 }
