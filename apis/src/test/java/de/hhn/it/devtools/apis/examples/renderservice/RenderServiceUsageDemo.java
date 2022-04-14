@@ -11,14 +11,15 @@ public class RenderServiceUsageDemo {
   public static void main(String[] args) throws IllegalParameterException, InterruptedException {
     RenderService renderService = null;
     Shape cube = Shape.CUBE;
-    double zoomInFactor = 0.5;
-    double zoomOutFactor = 1.5;
+    double zoomInFactor = 1.5;
+    double zoomOutFactor = 0.5;
     double rotationX = 4.0;
     double rotationY = 10.0;
 
-    int red = 255;
-    int green = 0;
-    int blue = 0;
+    float red = 1.0f;
+    float green = 0.2f;
+    float blue = 0.1f;
+    float alpha = 1.0f;
 
     logger.info(">>> render");
     // Render the shape given
@@ -44,8 +45,8 @@ public class RenderServiceUsageDemo {
 
     Thread.sleep(1000);
 
-    logger.info(">>> change color to red");
-    // Change the color of the shape to red
-    renderService.changeColor(red, green, blue);
+    logger.info(">>> change color");
+    // Change the color of the shape
+    renderService.changeColor(red, green, blue, alpha);
   }
 }

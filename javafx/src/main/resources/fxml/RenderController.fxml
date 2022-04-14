@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="680.0" maxWidth="1080.0"
+            minHeight="680.0" minWidth="1080.0" prefHeight="680.0"
+            prefWidth="1080.0"
+            fx:controller="de.hhn.it.devtools.javafx.controllers.renderer.RenderController">
+    <children>
+        <AnchorPane fx:id="controlAnchorPane" minHeight="0.0" minWidth="0.0"
+                    prefHeight="160.0" prefWidth="100.0">
+        </AnchorPane>
+    </children>
+</AnchorPane>

@@ -16,6 +16,7 @@ module devtools.javafx {
   uses de.hhn.it.devtools.apis.examples.coffeemakerservice.AdminCoffeeMakerService;
   opens de.hhn.it.devtools.javafx.controllers to javafx.fxml;
   opens de.hhn.it.devtools.javafx.controllers.coffeemaker to javafx.fxml;
+  opens de.hhn.it.devtools.javafx.controllers.renderer to javafx.fxml;
   exports de.hhn.it.devtools.javafx;
   exports de.hhn.it.devtools.javafx.controllers;
   exports de.hhn.it.devtools.javafx.controllers.coffeemaker;

@@ -35,11 +35,14 @@ public interface RenderService {
   /**
    * Updates the color values, which the render function uses.
    *
-   * @param red represents the red color on the RGB spectrum
-   * @param green represents the green color on the RGB spectrum
-   * @param blue represents the blue color on the RGB spectrum
+   * @param red   represents the red channel of the color spectre in OpenGL
+   * @param green represents the green channel of the color spectre in OpenGL
+   * @param blue  represents the blue channel of the color spectre in OpenGL
+   * @param alpha represents the alpha channel of the color spectre in OpenGL
+   * @throws IllegalParameterException if the values are out of range of the OpenGLColor standard [0,1]
    */
-  void changeColor(int red, int green, int blue);
+  void changeColor(float red, float green, float blue, float alpha)
+      throws IllegalParameterException;
 
   /**
    * Adds a listener to get updates on the state of the render calculations.
