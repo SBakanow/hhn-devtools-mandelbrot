@@ -1,5 +1,7 @@
 package de.hhn.it.devtools.apis.renderer;
 
+import de.hhn.it.devtools.apis.exceptions.IllegalParameterException;
+
 /**
  * This RenderService is an interface for calculating the currently selected shape.
  * The representation is done in the JavaFxOpenGL Renderer with the data the interface provides.
@@ -11,8 +13,9 @@ public interface RenderService {
    * so it can be added into a Vertex.
    *
    * @param shape shape to be rendered
+   * @throws IllegalParameterException if the shape does not exist
    */
-  void render(Shape shape);
+  void render(Shape shape) throws IllegalParameterException;
 
   /**
    * Updates the zoom value, which the render function uses.
@@ -42,13 +45,15 @@ public interface RenderService {
    * Adds a listener to get updates on the state of the render calculations.
    *
    * @param renderListener object implementing the listener interface
+   * @throws IllegalParameterException if the listener is a null reference
    */
-  void addCallback(RenderListener renderListener);
+  void addCallback(RenderListener renderListener) throws IllegalParameterException;
 
   /**
    * Removes a listener.
    *
    * @param renderListener listener to be removed
+   * @throws IllegalParameterException if the listener is a null reference
    */
-  void removeCallback(RenderListener renderListener);
+  void removeCallback(RenderListener renderListener) throws IllegalParameterException;
 }

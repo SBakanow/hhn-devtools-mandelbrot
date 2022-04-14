@@ -1,5 +1,6 @@
 package de.hhn.it.devtools.apis.examples.renderservice;
 
+import de.hhn.it.devtools.apis.exceptions.IllegalParameterException;
 import de.hhn.it.devtools.apis.renderer.RenderService;
 import de.hhn.it.devtools.apis.renderer.Shape;
 
@@ -7,7 +8,7 @@ public class RenderServiceUsageDemo {
   private static final org.slf4j.Logger logger =
       org.slf4j.LoggerFactory.getLogger(RenderServiceUsageDemo.class);
 
-  public static void main(String[] args) throws InterruptedException {
+  public static void main(String[] args) throws IllegalParameterException, InterruptedException {
     RenderService renderService = null;
     Shape cube = Shape.CUBE;
     double zoomInFactor = 0.5;
