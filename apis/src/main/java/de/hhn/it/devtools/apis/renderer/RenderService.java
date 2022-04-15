@@ -20,17 +20,21 @@ public interface RenderService {
   /**
    * Updates the zoom value, which the render function uses.
    *
-   * @param zoomPrecision value which represents the zoom level
+   * @param zoomX specifies scale factors along the X axis
+   * @param zoomY specifies scale factors along the Y axis
+   * @param zoomZ specifies scale factors along the Z axis
    */
-  void zoom(double zoomPrecision);
+  void zoom(double zoomX, double zoomY, double zoomZ);
 
   /**
    * Updates the rotation values, which the render function uses.
    *
+   * @param angle     specifies the angle of the rotation in degrees
    * @param rotationX currentRotation on the X axis
    * @param rotationY currentRotation on the Y axis
+   * @param rotationZ currentRotation on the Z axis
    */
-  void rotate(double rotationX, double rotationY);
+  void rotate(double angle, double rotationX, double rotationY, double rotationZ);
 
   /**
    * Updates the color values, which the render function uses.
