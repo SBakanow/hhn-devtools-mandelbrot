@@ -11,10 +11,16 @@ public class RenderServiceUsageDemo {
   public static void main(String[] args) throws IllegalParameterException, InterruptedException {
     RenderService renderService = null;
     Shape cube = Shape.CUBE;
-    double zoomInFactor = 1.5;
-    double zoomOutFactor = 0.5;
+    double zoomInX = 1.05;
+    double zoomInY = 1.05;
+    double zoomInZ = 1.05;
+    double zoomOutX = 0.95;
+    double zoomOutY = 0.95;
+    double zoomOutZ = 0.95;
+    double rotationAngle = 2.0;
     double rotationX = 4.0;
     double rotationY = 10.0;
+    double rotationZ = 0.0;
 
     float red = 1.0f;
     float green = 0.2f;
@@ -29,19 +35,19 @@ public class RenderServiceUsageDemo {
 
     logger.info(">>> zoom in");
     // Zoom into the render
-    renderService.zoom(zoomInFactor);
+    renderService.zoom(zoomInX, zoomInY, zoomInZ);
 
     Thread.sleep(1000);
 
     logger.info(">>> rotate");
     // Rotate the shape vertically and horizontally
-    renderService.rotate(rotationX, rotationY);
+    renderService.rotate(rotationAngle, rotationX, rotationY, rotationZ);
 
     Thread.sleep(1000);
 
     logger.info(">>> zoom out");
     // Zoom out of the render
-    renderService.zoom(zoomOutFactor);
+    renderService.zoom(zoomOutX, zoomOutY, zoomOutZ);
 
     Thread.sleep(1000);
 
