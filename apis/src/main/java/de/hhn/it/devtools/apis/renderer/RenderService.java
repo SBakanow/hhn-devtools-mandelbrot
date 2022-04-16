@@ -12,7 +12,7 @@ public interface RenderService {
   /**
    * In this function the currently selected shape gets calculated and preprocessed,
    * so it can be added into a Vertex. The shape is important to define the layout of
-   * the data (points of the selected shape) that's stored in an array.
+   * the data (points of the selected shape) that's stored in an buffer.
    *
    * @param shape shape to be rendered
    * @throws IllegalParameterException if the shape is invalid
