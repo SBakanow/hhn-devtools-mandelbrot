@@ -29,6 +29,9 @@ public class RenderController extends Controller implements Initializable {
   Pane stage;
 
   private float counter = 0;
+  private float red = 0;
+  private float green = 0;
+  private float blue = 0;
 
   public RenderController() {
     logger.debug("Template Controller created. Hey, if you have copied me, update this message!");
@@ -46,9 +49,21 @@ public class RenderController extends Controller implements Initializable {
       glOrtho(0.0, canvas.getScene().getWidth(), 0.0, canvas.getScene().getHeight(), -1.0, 100.0);
     });
     canvas.onRender(() -> {
-      GL11.glClearColor(0.1f, 0.0f, 0.0f, 1.0f);
+      GL11.glClearColor(red, green, blue, 1.0f);
       GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
       counter += 0.02;
+      red += 0.001f;
+      if (red >= 1) {
+        green += 0.001f;
+        if (green >= 1) {
+          blue += 0.001f;
+          if (blue >= 1) {
+            red = 0;
+            green = 0;
+            blue = 0;
+          }
+        }
+      }
       if (counter >= 1) {
         counter = 0;
       }
