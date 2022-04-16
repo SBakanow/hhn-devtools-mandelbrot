@@ -1,10 +1,10 @@
 package de.hhn.it.devtools.apis.renderer;
 
 /**
- * Available shapes/pattern of the renderer.
+ * Available shapes for which different parameters can be defined.
  */
-public enum Shape {
-  // The Mandelbrot function is a recursive function: z^2 + c . Iteration start: z=0 .
+public sealed interface Shape {
+  /*// The Mandelbrot function is a recursive function: z^2 + c . Iteration start: z=0 .
   MANDELBROT,
 
   CUBE,
@@ -14,4 +14,21 @@ public enum Shape {
 
   // Julia set is a recursion of a function.
   JULIA
+  */
+
+  final class Mandelbrot implements Shape {
+
+  }
+
+  final class Cube implements Shape {
+
+  }
+
+  final class Julia implements Shape {
+
+  }
+
+  final class RandomFractal implements Shape {
+
+  }
 }

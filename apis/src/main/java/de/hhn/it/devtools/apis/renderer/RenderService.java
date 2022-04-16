@@ -17,7 +17,7 @@ public interface RenderService {
    * @param shape shape to be rendered
    * @throws IllegalParameterException if the shape is invalid
    */
-  void render(Shape shape) throws IllegalParameterException;
+  void changeShape(Shape shape) throws IllegalParameterException;
 
   /**
    * Calculates and updates the new zoom value, which are used by the render function.
@@ -56,7 +56,7 @@ public interface RenderService {
    * @param renderListener object implementing the listener interface
    * @throws IllegalParameterException if the listener is a null reference
    */
-  void addCallback(RenderListener renderListener) throws IllegalParameterException;
+  void setCallback(RenderListener renderListener) throws IllegalParameterException;
 
   /**
    * Removes a given listener.
