@@ -10,7 +10,7 @@ public class RenderServiceUsageDemo {
 
   public static void main(String[] args) throws IllegalParameterException, InterruptedException {
     RenderService renderService = null;
-    Shape cube = Shape.CUBE;
+    Shape cube = new Shape.Cube();
     double zoomInX = 1.05;
     double zoomInY = 1.05;
     double zoomInZ = 1.05;
@@ -29,7 +29,7 @@ public class RenderServiceUsageDemo {
 
     logger.info(">>> render");
     // Render the shape given
-    renderService.render(cube);
+    renderService.changeShape(cube);
 
     Thread.sleep(3000);
 
