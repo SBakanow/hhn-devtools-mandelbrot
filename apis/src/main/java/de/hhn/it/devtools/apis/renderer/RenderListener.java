@@ -5,7 +5,7 @@ import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
 /**
- * Listener interface which the JavaFxOpenGL renderer uses to get the updated byte stream.
+ * Listener interface which the JavaFxOpenGL renderer uses to get the updated buffer.
  * The float buffer provided by this interface will be used in the vertex buffer.
  */
 public interface RenderListener {

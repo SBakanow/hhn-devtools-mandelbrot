@@ -20,7 +20,7 @@ public interface RenderService {
   void changeShape(Shape shape) throws IllegalParameterException;
 
   /**
-   * Calculates and updates the new zoom value, which are used by the render function.
+   * Calculates and updates the new zoom value, which are used by the viewProjectionMatrix.
    *
    * @param zoomX specifies scale factors along the X axis
    * @param zoomY specifies scale factors along the Y axis
@@ -29,7 +29,7 @@ public interface RenderService {
   void zoom(double zoomX, double zoomY, double zoomZ);
 
   /**
-   * Calculates and updates the new rotation values, which are used by the render function.
+   * Calculates and updates the new rotation values, which are used by the viewProjectionMatrix.
    *
    * @param angle     specifies the angle of the rotation in degrees
    * @param rotationX currentRotation on the X axis
@@ -39,7 +39,7 @@ public interface RenderService {
   void rotate(double angle, double rotationX, double rotationY, double rotationZ);
 
   /**
-   * Calculates and updates the new color values, which are used by the render function.
+   * Calculates and updates the new color values.
    *
    * @param red   represents the red channel of the color spectre in OpenGL
    * @param green represents the green channel of the color spectre in OpenGL
@@ -51,7 +51,7 @@ public interface RenderService {
       throws IllegalParameterException;
 
   /**
-   * Adds a listener to get updates on the state of the render calculations.
+   * Adds a listener to get updates on the buffer.
    *
    * @param renderListener object implementing the listener interface
    * @throws IllegalParameterException if the listener is a null reference
