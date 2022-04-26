@@ -48,11 +48,11 @@ public class RenderController extends Controller implements Initializable {
   Pane stage;
 
   private float[] vertexArray = {
-      // position            //color
-      100.5f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f,   // Bottom right 0
-      0.5f, 100.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,   // Top left     1
-      100.5f, 100.5f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f,   // Top right    2
-      0.5f, 0.5f, 0.0f, 1.0f, 1.0f, 0.0f, 1.0f    // Bottom left  3
+      // position             //color
+      200.0f,   0.0f, 0.0f,   1.0f, 0.0f, 0.0f, 1.0f,   // Bottom right 0
+        0.0f, 200.0f, 0.0f,   0.0f, 1.0f, 0.0f, 1.0f,   // Top left     1
+      200.0f, 200.0f, 0.0f,   0.0f, 0.0f, 1.0f, 1.0f,   // Top right    2
+        0.0f,   0.0f, 0.0f,   1.0f, 1.0f, 0.0f, 1.0f    // Bottom left  3
   };
 
   // IMPORTANT: Must be in counter-clockwise order
@@ -69,6 +69,8 @@ public class RenderController extends Controller implements Initializable {
   private int vaoID, vboID, eboID;
   private Shader defaultShader;
   public Camera camera;
+  private float cameraMoveX = 0.02f;
+  private float cameraMoveY = 0.02f;
 
   public RenderController() {
     logger.debug("Template Controller created. Hey, if you have copied me, update this message!");
@@ -128,8 +130,16 @@ public class RenderController extends Controller implements Initializable {
 
     });
     canvas.onRender(() -> {
+
       GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
-      camera.position.x -= 0.005 * 50.0f;
+      camera.position.x -= cameraMoveX * 50.0f;
+      if (camera.position.x < -885 || camera.position.x > 0) {
+        cameraMoveX = cameraMoveX * -1;
+      }
+      camera.position.y -= cameraMoveY * 50.0f;
+      if (camera.position.y < -425 || camera.position.y > 0) {
+        cameraMoveY = cameraMoveY * -1;
+      }
       defaultShader.use();
       defaultShader.uploadMat4f("uProjection", camera.getProjectionMatrix());
       defaultShader.uploadMat4f("uView", camera.getViewMatrix());
