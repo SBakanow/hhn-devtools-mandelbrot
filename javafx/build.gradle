@@ -45,6 +45,7 @@ dependencies {
     implementation 'org.lwjgl:lwjgl::natives-windows'
     implementation 'org.lwjgl:lwjgl-glfw::natives-windows'
     implementation 'org.lwjgl:lwjgl-opengl::natives-windows'
+    implementation 'org.joml:joml:1.9.23'
 
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib"
