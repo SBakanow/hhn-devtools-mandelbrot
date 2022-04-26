@@ -8,6 +8,8 @@ import static org.lwjgl.opengl.GL11.glDrawElements;
 import static org.lwjgl.opengl.GL11.glLoadIdentity;
 import static org.lwjgl.opengl.GL11.glMatrixMode;
 import static org.lwjgl.opengl.GL11.glOrtho;
+import static org.lwjgl.opengl.GL13.GL_TEXTURE0;
+import static org.lwjgl.opengl.GL13.glActiveTexture;
 import static org.lwjgl.opengl.GL15.GL_ARRAY_BUFFER;
 import static org.lwjgl.opengl.GL15.GL_ELEMENT_ARRAY_BUFFER;
 import static org.lwjgl.opengl.GL15.GL_STATIC_DRAW;
@@ -24,6 +26,7 @@ import com.huskerdev.openglfx.DirectDrawPolicy;
 import com.huskerdev.openglfx.OpenGLCanvas;
 import com.huskerdev.openglfx.lwjgl.LWJGLCanvasKt;
 import de.hhn.it.devtools.javafx.controllers.Controller;
+import de.hhn.it.devtools.javafx.controllers.renderer.shader.Texture;
 import java.net.URL;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
@@ -48,11 +51,11 @@ public class RenderController extends Controller implements Initializable {
   Pane stage;
 
   private float[] vertexArray = {
-      // position             //color
-      200.0f,   0.0f, 0.0f,   1.0f, 0.0f, 0.0f, 1.0f,   // Bottom right 0
-        0.0f, 200.0f, 0.0f,   0.0f, 1.0f, 0.0f, 1.0f,   // Top left     1
-      200.0f, 200.0f, 0.0f,   0.0f, 0.0f, 1.0f, 1.0f,   // Top right    2
-        0.0f,   0.0f, 0.0f,   1.0f, 1.0f, 0.0f, 1.0f    // Bottom left  3
+      // position             //color                     // UV Coordinates
+      1080.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1, 0, // Bottom right 0
+      0.0f, 620.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0, 1, // Top left     1
+      1080.0f, 620.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1, 1, // Top right    2
+      0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 1.0f, 0, 0  // Bottom left  3
   };
 
   // IMPORTANT: Must be in counter-clockwise order
@@ -68,6 +71,7 @@ public class RenderController extends Controller implements Initializable {
 
   private int vaoID, vboID, eboID;
   private Shader defaultShader;
+  private Texture testTexture;
   public Camera camera;
   private float cameraMoveX = 0.02f;
   private float cameraMoveY = 0.02f;
@@ -75,6 +79,7 @@ public class RenderController extends Controller implements Initializable {
   public RenderController() {
     logger.debug("Template Controller created. Hey, if you have copied me, update this message!");
     stage = createGL();
+    System.out.println(System.getProperty("user.dir"));
   }
 
   Pane createGL() {
@@ -92,8 +97,10 @@ public class RenderController extends Controller implements Initializable {
       defaultShader =
           new Shader(
               System.getProperty("user.dir")
-                  + "/src/main/java/de/hhn/it/devtools/javafx/controllers/renderer/shader/default.glsl");
+                  +
+                  "/src/main/java/de/hhn/it/devtools/javafx/controllers/renderer/shader/default.glsl");
       defaultShader.compile();
+      this.testTexture = new Texture("C:/Users/serge/Desktop/Software Engineering/3. Semester/DevTools/Aufgabe/arting-devtools-22-ss/javafx/src/main/resources/img/mandelbrot_1280x720.jpg");
 
       // Generate VAO, VBO and EBO buffer objects and send to GPU
       vaoID = glGenVertexArrays();
@@ -119,28 +126,38 @@ public class RenderController extends Controller implements Initializable {
       // Add the vertex attribute pointers
       int positionsSize = 3;
       int colorSize = 4;
-      int floatSizeInBytes = 4;
-      int vertexSizeInBytes = (positionsSize + colorSize) * floatSizeInBytes;
+      int uvSize = 2;
+      int vertexSizeInBytes = (positionsSize + colorSize + uvSize) * Float.BYTES;
       glVertexAttribPointer(0, positionsSize, GL_FLOAT, false, vertexSizeInBytes, 0);
       glEnableVertexAttribArray(0);
 
       glVertexAttribPointer(1, colorSize, GL_FLOAT, false, vertexSizeInBytes,
-          positionsSize * floatSizeInBytes);
+          positionsSize * Float.BYTES);
       glEnableVertexAttribArray(1);
+
+      glVertexAttribPointer(2, uvSize, GL_FLOAT, false, vertexSizeInBytes,
+          (positionsSize + colorSize) * Float.BYTES);
+      glEnableVertexAttribArray(2);
 
     });
     canvas.onRender(() -> {
 
       GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
-      camera.position.x -= cameraMoveX * 50.0f;
+/*      camera.position.x -= cameraMoveX * 50.0f;
       if (camera.position.x < -885 || camera.position.x > 0) {
         cameraMoveX = cameraMoveX * -1;
       }
       camera.position.y -= cameraMoveY * 50.0f;
       if (camera.position.y < -425 || camera.position.y > 0) {
         cameraMoveY = cameraMoveY * -1;
-      }
+      }*/
       defaultShader.use();
+
+      // Upload texture to shader
+      defaultShader.uploadTexture("TEX_SAMPLER", 0);
+      glActiveTexture(GL_TEXTURE0);
+      testTexture.bind();
+
       defaultShader.uploadMat4f("uProjection", camera.getProjectionMatrix());
       defaultShader.uploadMat4f("uView", camera.getViewMatrix());
       defaultShader.uploadFloat("uTime", Time.getTime());
