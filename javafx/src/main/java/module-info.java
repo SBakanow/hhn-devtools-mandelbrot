@@ -12,6 +12,7 @@ module devtools.javafx {
   requires org.lwjgl.opengl;
   requires lwjgl;
   requires kotlin.stdlib;
+  requires org.joml;
   uses de.hhn.it.devtools.apis.examples.coffeemakerservice.CoffeeMakerService;
   uses de.hhn.it.devtools.apis.examples.coffeemakerservice.AdminCoffeeMakerService;
   opens de.hhn.it.devtools.javafx.controllers to javafx.fxml;
