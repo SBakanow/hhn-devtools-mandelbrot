@@ -143,6 +143,7 @@ public class RenderController extends Controller implements Initializable {
       defaultShader.use();
       defaultShader.uploadMat4f("uProjection", camera.getProjectionMatrix());
       defaultShader.uploadMat4f("uView", camera.getViewMatrix());
+      defaultShader.uploadFloat("uTime", Time.getTime());
       // Bind the VAO that we're using
       glBindVertexArray(vaoID);
 
