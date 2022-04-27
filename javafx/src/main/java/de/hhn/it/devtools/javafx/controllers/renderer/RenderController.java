@@ -52,9 +52,9 @@ public class RenderController extends Controller implements Initializable {
 
   private float[] vertexArray = {
       // position             //color                     // UV Coordinates
-      1080.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1, 0, // Bottom right 0
-      0.0f, 620.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0, 1, // Top left     1
-      1080.0f, 620.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1, 1, // Top right    2
+      260.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 1, 0, // Bottom right 0
+      0.0f, 232.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, 0, 1, // Top left     1
+      260.0f, 232.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1, 1, // Top right    2
       0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f, 1.0f, 0, 0  // Bottom left  3
   };
 
@@ -100,7 +100,8 @@ public class RenderController extends Controller implements Initializable {
                   +
                   "/src/main/java/de/hhn/it/devtools/javafx/controllers/renderer/shader/default.glsl");
       defaultShader.compile();
-      this.testTexture = new Texture("C:/Users/serge/Desktop/Software Engineering/3. Semester/DevTools/Aufgabe/arting-devtools-22-ss/javafx/src/main/resources/img/mandelbrot_1280x720.jpg");
+      this.testTexture = new Texture(System.getProperty("user.dir")
+          + "/src/main/resources/img/crying-emoji-9.gif");
 
       // Generate VAO, VBO and EBO buffer objects and send to GPU
       vaoID = glGenVertexArrays();
@@ -143,14 +144,14 @@ public class RenderController extends Controller implements Initializable {
     canvas.onRender(() -> {
 
       GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
-/*      camera.position.x -= cameraMoveX * 50.0f;
-      if (camera.position.x < -885 || camera.position.x > 0) {
+      camera.position.x -= cameraMoveX * 50.0f;
+      if (camera.position.x < -851 || camera.position.x > 24) {
         cameraMoveX = cameraMoveX * -1;
       }
       camera.position.y -= cameraMoveY * 50.0f;
-      if (camera.position.y < -425 || camera.position.y > 0) {
+      if (camera.position.y < -404 || camera.position.y > 14) {
         cameraMoveY = cameraMoveY * -1;
-      }*/
+      }
       defaultShader.use();
 
       // Upload texture to shader

@@ -2,7 +2,7 @@ package de.hhn.it.devtools.javafx.controllers.renderer.shader;
 
 import static org.lwjgl.opengl.GL11.GL_NEAREST;
 import static org.lwjgl.opengl.GL11.GL_REPEAT;
-import static org.lwjgl.opengl.GL11.GL_RGB;
+import static org.lwjgl.opengl.GL11.GL_RGBA;
 import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
 import static org.lwjgl.opengl.GL11.GL_TEXTURE_MAG_FILTER;
 import static org.lwjgl.opengl.GL11.GL_TEXTURE_MIN_FILTER;
@@ -47,7 +47,7 @@ public class Texture {
     ByteBuffer image = stbi_load(filepath, width, height, channels, 0);
 
     if (image != null) {
-      glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width.get(0), height.get(0), 0, GL_RGB,
+      glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width.get(0), height.get(0), 0, GL_RGBA,
           GL_UNSIGNED_BYTE, image);
     } else {
       System.out.println("Error: (Texture) Could not load image '" + filepath + "'");
