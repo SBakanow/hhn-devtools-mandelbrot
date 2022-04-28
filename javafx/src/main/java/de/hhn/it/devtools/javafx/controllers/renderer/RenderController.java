@@ -1,5 +1,15 @@
 package de.hhn.it.devtools.javafx.controllers.renderer;
 
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_DOWN;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_ESCAPE;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT_CONTROL;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT_SHIFT;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_UP;
+import static org.lwjgl.glfw.GLFW.GLFW_PRESS;
+import static org.lwjgl.glfw.GLFW.glfwGetKey;
+import static org.lwjgl.glfw.GLFW.glfwSetWindowShouldClose;
 import static org.lwjgl.opengl.GL11.GL_DEPTH_BUFFER_BIT;
 import static org.lwjgl.opengl.GL11.GL_FLOAT;
 import static org.lwjgl.opengl.GL11.GL_PROJECTION;
@@ -34,8 +44,10 @@ import java.net.URL;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.util.ResourceBundle;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import org.joml.Vector2f;
@@ -53,12 +65,15 @@ public class RenderController extends Controller implements Initializable {
 
   Pane stage;
 
+  float centerX = 0.0f;
+  float centerY = 0.0f;
+  float zoom = 1.0f;
   private float[] vertexArray = {
       // position
       -1f, -1f, -0.0f,
-       1f,  1f, -0.0f,
-      -1f,  1f, -0.0f,
-       1f, -1f, -0.0f
+      1f, 1f, -0.0f,
+      -1f, 1f, -0.0f,
+      1f, -1f, -0.0f
   };
 
   // IMPORTANT: Must be in counter-clockwise order
@@ -90,6 +105,46 @@ public class RenderController extends Controller implements Initializable {
     canvas.createTimer(200.0);
     canvas.setMinWidth(1280);
     canvas.setMinHeight(720);
+    canvas.setOnKeyPressed(event -> {
+      switch (event.getCode()) {
+        case S:
+          centerY = centerY + 0.01f * zoom;
+          if (centerY > 1.0f) {
+            centerY = 1.0f;
+          }
+          break;
+        case W:
+          centerY = centerY - 0.01f * zoom;
+          if (centerY < -1.0f) {
+            centerY = -1.0f;
+          }
+          break;
+        case A:
+          centerX = centerX - 0.01f * zoom;
+          if (centerX < -1.0f) {
+            centerX = -1.0f;
+          }
+          break;
+        case D:
+          centerX = centerX + 0.01f * zoom;
+          if (centerX > 1.0f) {
+            centerX = 1.0f;
+          }
+          break;
+        case Q:
+          zoom = zoom * 1.04f;
+          if (zoom > 1.0f) {
+            zoom = 1.0f;
+          }
+          break;
+        case E:
+          zoom = zoom * 0.96f;
+          if (zoom < 0.00001f) {
+            zoom = 0.00001f;
+          }
+          break;
+      }
+    });
     canvas.onReshape(() -> {
       glMatrixMode(GL_PROJECTION);
       glLoadIdentity();
@@ -97,7 +152,7 @@ public class RenderController extends Controller implements Initializable {
     });
     canvas.onInitialize(() -> {
       glViewport(0, 0, 1280, 720);
-/*      this.camera = new Camera(new Vector2f());*/
+      /*      this.camera = new Camera(new Vector2f());*/
       defaultShader =
           new Shader(
               System.getProperty("user.dir")
@@ -161,6 +216,10 @@ public class RenderController extends Controller implements Initializable {
       }*/
       defaultShader.use();
 
+
+      defaultShader.uploadFloat("zoom", zoom);
+      defaultShader.uploadFloat("centerX", centerX);
+      defaultShader.uploadFloat("centerY", centerY);
 /*      // Upload texture to shader
       defaultShader.uploadTexture("TEX_SAMPLER", 0);
       glActiveTexture(GL_TEXTURE0);
@@ -174,13 +233,13 @@ public class RenderController extends Controller implements Initializable {
 
       // Enable the vertex attribute pointers
       glEnableVertexAttribArray(0);
-/*      glEnableVertexAttribArray(1);*/
+      /*      glEnableVertexAttribArray(1);*/
 
       glDrawElements(GL_TRIANGLES, elementArray.length, GL_UNSIGNED_INT, 0);
 
       // Unbind everything
       glDisableVertexAttribArray(0);
-/*      glDisableVertexAttribArray(1);*/
+      /*      glDisableVertexAttribArray(1);*/
 
       glBindVertexArray(0);
 
@@ -195,7 +254,11 @@ public class RenderController extends Controller implements Initializable {
       logger.debug("Not null");
     }
     controlAnchorPane.getChildren().add(stage);
+    stage.requestFocus();
+    stage.setFocusTraversable(true);
   }
 }
+
+
 
 
