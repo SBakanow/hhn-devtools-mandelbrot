@@ -1,34 +1,58 @@
 #type vertex
 #version 330 core
-layout (location=0) in vec3 aPos;
-layout (location=1) in vec4 aColor;
-layout (location=2) in vec2 aTexCoords;
-
-uniform mat4 uProjection;
-uniform mat4 uView;
-
-out vec4 fColor;
-out vec2 fTexCoords;
+layout (location = 0) in vec3 aPos;
 
 void main()
 {
-    fColor = aColor;
-    fTexCoords = aTexCoords;
-    gl_Position = uProjection * uView * vec4(aPos, 1.0);
+    gl_Position = vec4(aPos.xyz, 1.0);
 }
 
-    #type fragment
-    #version 330 core
+#type fragment
+#version 330 core
 
-uniform float uTime;
-uniform sampler2D TEX_SAMPLER;
+in vec4 gl_FragCoord;
 
-in vec4 fColor;
-in vec2 fTexCoords;
+out vec4 frag_color;
 
-out vec4 color;
+int get_iterations()
+{
+    float real = (gl_FragCoord.x / 1000.0 - 0.5) * 4.0;
+    float imag = (gl_FragCoord.y / 1000.0 - 0.07) * 4.0;
+
+    int iterations = 0;
+    float const_real = real;
+    float const_imag = imag;
+
+    while (iterations < 100)
+    {
+        float tmp_real = real;
+        real = (real * real - imag * imag) + const_real;
+        imag = (2.0 * tmp_real * imag) + const_imag;
+
+        float dist = real * real + imag * imag;
+
+        if(dist > 4.0)
+        {
+            break;
+        }
+        ++iterations;
+    }
+    return iterations;
+}
+
+vec4 return_color()
+{
+    int iter = get_iterations();
+    if (iter == 100)
+    {
+        gl_FragDepth = 0.0f;
+        return vec4(0.0f, 0.0f, 0.0f, 1.0f);
+    }
+    float iterations = float(iter) / 100;
+    return vec4(0.0f, iterations, 0.0f, 1.0f);
+}
 
 void main()
 {
-    color = texture(TEX_SAMPLER, fTexCoords);
+    frag_color = return_color();
 }
